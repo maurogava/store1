@@ -3,12 +3,16 @@
 import Link from 'next/link'
 import { useMenu } from '@/providers/MenuProvider'
 import { X } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
+
 type MobileMenuProps = {
   categories: string[]
 }
 
 export default function MobileMenu({ categories }: MobileMenuProps) {
   const { isMenuOpen, closeMenu } = useMenu()
+  const pathname = usePathname()
 
   if (!isMenuOpen) return null
 
@@ -18,11 +22,24 @@ export default function MobileMenu({ categories }: MobileMenuProps) {
         <X className="h-6 w-6" />
       </button>
       <div className="flex flex-col items-center space-y-6 p-6">
-        {categories.map((category) => (
-          <Link key={category} href={`/${encodeURIComponent(category)}`} onClick={closeMenu}>
-            {category}
-          </Link>
-        ))}
+        {categories.map((category) => {
+          const href = `/${encodeURIComponent(category)}`
+          const isActive = pathname === href
+
+          return (
+            <Link
+              key={category}
+              href={href}
+              onClick={closeMenu}
+              className={cn(
+                'text-primary transition-colors hover:underline',
+                isActive && 'underline',
+              )}
+            >
+              {category}
+            </Link>
+          )
+        })}
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ import MenuButton from './MenuButton'
 import MobileMenu from './MobileMenu'
 import { MenuProvider } from '@/providers/MenuProvider'
 import { Suspense } from 'react'
+import NavLink from './NavLink'
 
 export default async function Navbar() {
   // Server-side data fetching
@@ -22,9 +23,7 @@ export default async function Navbar() {
 
         <div className="hidden space-x-8 md:flex">
           {categories.map((category) => (
-            <Link key={category} href={`/${encodeURIComponent(category)}`}>
-              {category}
-            </Link>
+            <NavLink key={category} href={`/${encodeURIComponent(category)}`} category={category} />
           ))}
         </div>
 
