@@ -4,6 +4,7 @@ import Search from '@/components/search/Search'
 import MenuButton from './MenuButton'
 import MobileMenu from './MobileMenu'
 import { MenuProvider } from '@/providers/MenuProvider'
+import { Suspense } from 'react'
 
 export default async function Navbar() {
   // Server-side data fetching
@@ -28,7 +29,9 @@ export default async function Navbar() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <Search />
+          <Suspense>
+            <Search />
+          </Suspense>
         </div>
       </nav>
 

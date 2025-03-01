@@ -4,6 +4,7 @@ import { Search as SearchIcon, X } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSyncUrlParam } from '@/hooks/useSyncUrlParam'
 import { useState } from 'react'
+
 export default function Search() {
   const [searchQuery, setSearchQuery] = useState('')
   const router = useRouter()
